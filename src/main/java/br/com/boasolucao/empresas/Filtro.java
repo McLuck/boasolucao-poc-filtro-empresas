@@ -54,14 +54,30 @@ public class Filtro {
 			switch (comparador) {
 			case LIKE:
 				return texto.toLowerCase().contains(valor.toLowerCase());
-			case IGUAL:
+			case IGUAL: {
+				if (coluna.ehNumerico()) {
+					return Double.valueOf(texto).compareTo(Double.valueOf(valor)) == 0;
+				}
 				return texto.equalsIgnoreCase(valor);
-			case DIFERENTE:
+			}
+			case DIFERENTE:{
+				if (coluna.ehNumerico()) {
+					return Double.valueOf(texto).compareTo(Double.valueOf(valor)) != 0;
+				}				
 				return !texto.equalsIgnoreCase(valor);
-			case MAIOR:
+			}
+			case MAIOR: {
+				if (coluna.ehNumerico()) {
+					return Double.valueOf(texto).compareTo(Double.valueOf(valor)) > 0;
+				}
 				return valor.compareTo(texto) > 0;
-			case MENOR:
+			}
+			case MENOR: {
+				if (coluna.ehNumerico()) {
+					return Double.valueOf(texto).compareTo(Double.valueOf(valor)) < 0;
+				}				
 				return valor.compareTo(texto) < 0;
+			}
 			case IN: {
 				String[] valoresMapeados = valores.get(valor);
 				if (valoresMapeados == null) {

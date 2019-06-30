@@ -157,7 +157,7 @@ public class Aplicacao {
 		colunas.add(new Coluna(TEL2, 751, 12));
 		colunas.add(new Coluna(FAX, 763, 12));
 		colunas.add(new Coluna(EMAIL, 775, 115));
-		colunas.add(new Coluna(CAPITAL_SOCIAL, 892, 14));
+		colunas.add(new Coluna(CAPITAL_SOCIAL, 892, 14).tipoNumero());
 		colunas.add(new Coluna(PORTE, 906, 2));
 		colunas.add(new Coluna(SIMPLES, 908, 1));
 		colunas.add(new Coluna(MEI, 925, 1));
