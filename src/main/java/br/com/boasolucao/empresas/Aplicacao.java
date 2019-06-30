@@ -27,13 +27,13 @@ public class Aplicacao {
 	public static void main(String[] args) throws Exception {
 		montarColunas();
 		
-		lerArquivo = "K3241.K03200DV.D90607.L00001";
-		escreverArquivo = "K3241.K03200DV.D90607.L00001-filtrado";
+		lerArquivo = "/Users/lucasisrael/Downloads/K3241.K03200DV.D90607.L00001";
+		escreverArquivo = "/Users/lucasisrael/Downloads/K3241.K03200DV.D90607.L00001-processado.csv";
 		
 		/**
 		 * Caso não trasforme em CSV, o arquivo poderá ter novos filtros aplicados nesta aplicação
 		 */
-		converterEmCSV = false;
+		converterEmCSV = true;
 
 		filtros.add(Filtro.filtrar(CNAE, IGUAL, "5611203"));
 

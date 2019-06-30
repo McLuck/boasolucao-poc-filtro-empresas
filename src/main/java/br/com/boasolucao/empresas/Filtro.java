@@ -48,6 +48,7 @@ public class Filtro {
 				texto = texto.trim();
 			}
 			switch (comparador) {
+			case LIKE: return texto.toLowerCase().contains(valor.toLowerCase());
 			case IGUAL:
 				return texto.equals(valor);
 			case DIFERENTE:
