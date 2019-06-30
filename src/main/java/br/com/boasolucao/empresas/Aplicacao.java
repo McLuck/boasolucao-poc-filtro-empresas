@@ -36,6 +36,7 @@ public class Aplicacao {
 		converterEmCSV = true;
 
 		filtros.add(Filtro.filtrar(CNAE, IGUAL, "5611203"));
+		filtros.add(Filtro.filtrar(UF, IGUAL, "SP"));
 
 		criarArquivoFiltrado();
 	}
@@ -132,7 +133,9 @@ public class Aplicacao {
 		} else {
 			stream = filtros.stream();
 		}
-		return stream.filter(f -> f.atende(coluna, valor)).findAny().isPresent();
+		int quantidadeFiltros = filtros.size();
+		
+		return stream.filter(f -> f.atende(coluna, valor)).count() == quantidadeFiltros;
 	}
 
 	static void montarColunas() {
