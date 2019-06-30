@@ -5,6 +5,7 @@ public class Coluna {
 	private int posicao;
 	private int tamanho;
 	
+	public static final String DETALHE = "DETALHE";
 	public static final String CNPJ = "CNPJ";
 	public static final String INDICADOR_MATRIZ = "Indicador Matriz(1)/Filial(2)";
 	public static final String RAZAO_SOCIAL = "Razão Social";
