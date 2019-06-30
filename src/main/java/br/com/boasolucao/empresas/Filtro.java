@@ -1,12 +1,16 @@
 package br.com.boasolucao.empresas;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Filtro {
 	private String nome;
 	private Comparador comparador = Comparador.IGUAL;
 	private boolean aceitaVazio;
 	private String valor;
 	private boolean trimmed = true;
-	
+	private static Map<String, String[]> valores = new HashMap<String, String[]>();
+
 	public Filtro aceitarVazio() {
 		aceitaVazio = true;
 		return this;
@@ -48,15 +52,32 @@ public class Filtro {
 				texto = texto.trim();
 			}
 			switch (comparador) {
-			case LIKE: return texto.toLowerCase().contains(valor.toLowerCase());
+			case LIKE:
+				return texto.toLowerCase().contains(valor.toLowerCase());
 			case IGUAL:
-				return texto.equals(valor);
+				return texto.equalsIgnoreCase(valor);
 			case DIFERENTE:
-				return !texto.equals(valor);
+				return !texto.equalsIgnoreCase(valor);
 			case MAIOR:
 				return valor.compareTo(texto) > 0;
 			case MENOR:
 				return valor.compareTo(texto) < 0;
+			case IN: {
+				String[] valoresMapeados = valores.get(valor);
+				if (valoresMapeados == null) {
+					valoresMapeados = valor.split(",");
+					for (int i = 0; i < valoresMapeados.length; i++) {
+						valoresMapeados[i] = valoresMapeados[i].trim().toLowerCase();
+					}
+					valores.put(valor, valoresMapeados);
+				}
+				for (String string : valoresMapeados) {
+					if (string.equalsIgnoreCase(texto)) {
+						return true;
+					}
+				}
+				return false;
+			}
 			}
 		}
 		return false;
